@@ -81,6 +81,11 @@ public class ExtTelephonyServiceImpl extends Stub {
         return QtiEmergencyCallHelper.getPhoneIdForECall();
     }
 
+    public boolean isFdnEnabled() {
+        if (DBG) logd("isFdnEnabled()");
+        return false;
+    }
+
     private void logd(String string) {
         Rlog.d(LOG_TAG, string);
     }
