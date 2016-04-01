@@ -84,7 +84,7 @@ public class QtiDctController extends DctController {
             int ddsSubId = this.mSubController.getDefaultDataSubId();
             for (Object obj : this.mRequestInfos.keySet()) {
                 RequestInfo requestInfo = (RequestInfo) this.mRequestInfos.get(obj);
-                if (getRequestPhoneId(requestInfo.request) == phoneId && !requestInfo.executed) {
+                if (getRequestPhoneId(requestInfo.request) == phoneId && requestInfo.executedPhoneId == SubscriptionManager.INVALID_PHONE_INDEX) {
                     informDdsToRil(ddsSubId);
                     this.mDcSwitchAsyncChannel[phoneId].connect(requestInfo, obtainMessage(EVENT_CONNECT_RESPONSE, phoneId, 0));
                     Phone phone = this.mPhones[phoneId].getActivePhone();
