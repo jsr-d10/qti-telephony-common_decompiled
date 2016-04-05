@@ -225,7 +225,12 @@ public class QtiRadioCapabilityController extends Handler {
     private void syncCurrentStackInfo() {
         for (int i = FAILURE; i < mNumPhones; i += SUCCESS) {
             int i2;
-            this.mCurrentStackId[i] = Integer.valueOf(this.mRadioCapability[i].getLogicalModemUuid()).intValue();
+            String uuid = this.mRadioCapability[i].getLogicalModemUuid();
+            if (uuid == "") {
+                logd("Working around getLogicalModemUuid()='' glitch");
+                uuid=new Integer(i).toString();
+            }
+            this.mCurrentStackId[i] = Integer.valueOf(uuid).intValue();
             this.mRadioAccessFamily[this.mCurrentStackId[i]] = this.mRadioCapability[i].getRadioAccessFamily();
             int[] iArr = this.mPreferredStackId;
             if (this.mCurrentStackId[i] >= 0) {
